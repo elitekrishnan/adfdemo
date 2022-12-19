@@ -1,0 +1,9 @@
+{
+	"name": "adf-azureadf-dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ed3d7542-ba6f-4a77-92a2-ae05c476fe39",
+		"tenantId": "b9fec68c-c92d-461e-9a97-3d03a0f18b82"
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"name": "SourceFileDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GenericADLSG2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "green_tripdata_2022-09.parquet",
+				"folderPath": "ExternalData",
+				"fileSystem": "fs-synapsedev"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

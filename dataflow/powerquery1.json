@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "TargetDataset",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> TargetDataset",
+					"dataset": {
+						"referenceName": "TargetDataset",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared TargetDataset = let AdfDoc = AzureStorage.DataLakeContents(\"https://stsynapsedev27.dfs.core.windows.net/fs-synapsedev/ProcessedData/GreenTripData.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"TargetDataset\",\r\n  #\"Choose columns\" = Table.SelectColumns(Source, {\"VendorID\", \"lpep_pickup_datetime\", \"lpep_dropoff_datetime\", \"store_and_fwd_flag\", \"RatecodeID\", \"PULocationID\", \"DOLocationID\", \"passenger_count\", \"trip_distance\", \"fare_amount\"}),\r\n  #\"Sorted rows\" = Table.Sort(#\"Choose columns\", {{\"fare_amount\", Order.Ascending}}) in #\"Sorted rows\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
